@@ -12,7 +12,7 @@ class BS extends React.Component {
     constructor(props) {
         super(props);
 
-        this.state = {zoomDomain:{  y: [0, 1000]}};
+        this.state = {zoomDomain:{  y: [0, 1000]}, selectedDomain:{  y: [0, 1000]}};
         this.labelStyles = ['black', 'red', 'blue', 'green', 'orange'];
         this.handleKeyPress = this.handleKeyPress.bind(this);
 
@@ -89,8 +89,9 @@ class BS extends React.Component {
 
         var charts = [];
 
-
+        charts.push(<div key={"title_" + 0}>{this.props.dimensions[0]}</div>);
         charts.push(
+
             <V.VictoryChart key={"0"} width={700} height={350} scale={{x: "time"}}
                             containerComponent={
 
@@ -138,7 +139,7 @@ class BS extends React.Component {
             </V.VictoryChart>
         );
 
-        for (var i = 1; i < this.props.dimensions.length; i++) {
+        for (var i = 0; i < this.props.dimensions.length; i++) {
             charts.push(<div key={"title_" + i}>{this.props.dimensions[i]}</div>);
             charts.push(<V.VictoryChart key={"chart_" + i}
                                         padding={{top: 0, left: 50, right: 50, bottom: 30}}
@@ -146,7 +147,7 @@ class BS extends React.Component {
                                         containerComponent={
                                             <V.VictoryBrushContainer responsive={false}
                                                                      brushDimension="x"
-                                                                     brushDomain={this.state.selectedDomain}
+                                                                     brushDomain={{x: this.state.selectedDomain.x }}
                                                                      onBrushDomainChange={this.handleBrush.bind(this)}
                                             />
                                         }

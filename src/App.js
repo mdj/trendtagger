@@ -129,7 +129,7 @@ function App() {
 
 
             setData(data);
-            setDimensions(["Close","Volume","Adx14","Mdi14","Pdi14"]/*,"Adx5","Mdi5","Pdi5","Adx2","Mdi2","Pdi2","PPO12_26","PPO12_26_Signal","Inv_PPO26_12","Inv_PPO26_12_Signal","FastSTOK5","FastSTOD3","FullSTOK3","FullSTOD3","CCI20","CCI15","CCI7","RSI14","RSI7","SMA7","SMA10","SMA20","SMA50","TRIX2","TRIX2_Signal","WILLR14","WILLR7","SAR"]*/);
+            setDimensions(["Close","Volume","Adx14","Mdi14","Pdi14","Adx5","Mdi5","Pdi5","Adx2","Mdi2","Pdi2","PPO12_26","PPO12_26_Signal"] /*,"Inv_PPO26_12","Inv_PPO26_12_Signal","FastSTOK5","FastSTOD3","FullSTOK3","FullSTOD3","CCI20","CCI15","CCI7","RSI14","RSI7","SMA7","SMA10","SMA20","SMA50","TRIX2","TRIX2_Signal","WILLR14","WILLR7","SAR"]*/);
 
         });
     }, []);
@@ -172,14 +172,14 @@ function App() {
                             <h1 className="h2">Trend series</h1>
                         </div>
                         <button onClick={() => downloadData(data, filename)}>Download data</button>
-
-                        <BS data={data} dimensions={dimensions} primary={"Close"} selectedClass={selectedClass}/>
                         <div>
                             <button onClick={() => setClass(0)}>No label</button>
                             <button onClick={() => setClass(1)}>Class 1</button>
                             <button onClick={() => setClass(2)}>Class 2</button>
 
                         </div>
+
+                        <BS data={data} dimensions={dimensions} primary={"Close"} selectedClass={selectedClass}/>
                     </Col>
                 </Row>
 
