@@ -8,34 +8,43 @@ const VictoryZoomSelectionContainer = V.createContainer("zoom", "selection");
 
 class BS extends React.Component {
 
+
     constructor(props) {
-        super();
+        super(props);
 
         this.state = {zoomDomain:{  y: [0, 1000]}};
+        this.labelStyles = ['black', 'red', 'blue', 'green', 'orange'];
+        this.handleKeyPress = this.handleKeyPress.bind(this);
 
     }
-
+    handleKeyPress(e) {
+        console.log(e);
+        if (e.key === 'Enter' && e.shiftKey) {
+            // $('#app').append("<br/> Detected Shift+Enter")
+            console.log(e);
+        }
+    }
     handleSelection(points, bounds, props) {
         // this.setState({selectedDomain: domain});
-        console.log("handleSelection()");
+        // console.log("handleSelection()");
         // domain[0].data.active = true;
-        console.log("points", points);
+        // console.log("points", points);
 
         for (var i=0; i < this.props.data.length; i++) {
             for (var j=0; j < points[0].data.length; j++) {
                 if (this.props.data[i].Date === points[0].data[j].Date) {
 
-                    if (this.props.data[i].labeled) {
-                        this.props.data[i].labeled = false;
+                    if (this.props.data[i].Labeled) {
+                        this.props.data[i].Labeled = this.props.selectedClass;
                     } else {
-                        this.props.data[i].labeled = true;
+                        this.props.data[i].Labeled = this.props.selectedClass;
                     }
                 }
 
             }
         }
-        console.log("bounds", bounds);
-        console.log("props", props);
+        // console.log("bounds", bounds);
+        // console.log("props", props);
         // for (var i = 0; i < points[0].data.length; i++) {
         //     if (points[0].data[i].fill == "tomato") {
         //         points[0].data[i].fill = 'grey';
@@ -43,18 +52,18 @@ class BS extends React.Component {
         //         points[0].data[i].fill = 'tomato';
         //     }
         // }
-        console.log(this.props.data);
+        // console.log(this.props.data);
     }
 
     handleSelectionCleared(points, bounds, props) {
         // this.setState({selectedDomain: domain});
-        console.log("handleSelectionCleared()");
+        // console.log("handleSelectionCleared()");
 
     }
 
     handleZoom(domain) {
         this.setState({selectedDomain: domain});
-        console.log("handleZoom(", domain, ")");
+        // console.log("handleZoom(", domain, ")");
     }
 
     handleBrush(domain, props) {
@@ -66,7 +75,7 @@ class BS extends React.Component {
 
         this.setState({selectedDomain: domain});
 
-        console.log("handleBrush(", domain, ")");
+        // console.log("handleBrush(", domain, ")");
     }
 
     handleBrushTag(domain) {
@@ -106,7 +115,7 @@ class BS extends React.Component {
                 <V.VictoryScatter
                 style= {{
                     data: {
-                        fill: ({ datum }) => datum.labeled ? "red" : "black",
+                        fill: ({ datum }) => datum.Labeled ? this.labelStyles[datum.Labeled] : "black",
                     }
                 }}
                 data={this.props.data}
@@ -147,7 +156,7 @@ class BS extends React.Component {
                 <V.VictoryLine
                     name={this.props.dimensions[i]}
                     style={{
-                data: { stroke: ({ labeled }) => labeled ? "tomato" : "gray" }
+                data: { stroke: ({ Labeled }) => Labeled ? "tomato" : "gray" }
                 }}
                     data={this.props.data}
                     x={"Date"}
