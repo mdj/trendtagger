@@ -47,6 +47,10 @@ import {csv, timeParse} from 'd3';
           dif + pad(tzo / 60) + pad(tzo % 60);
   }
 
+  function saveData(data) {
+
+  }
+
 function downloadData(data, filename) {
 
     // console.log(csvContent);
@@ -103,7 +107,6 @@ function downloadData(data, filename) {
 function App() {
     const [data, setData] = useState([]);
     const [dimensions, setDimensions] = useState([]);
-    const [selectedClass, setClass] = useState(1);
     const [filename, setFilename] = useState("ABEV.csv");
 
     useEffect(() => {
@@ -133,6 +136,8 @@ function App() {
 
         });
     }, []);
+
+
     return (
         <div className="App">
             <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark" fixed={"top"}>
@@ -171,15 +176,11 @@ function App() {
                             className={"d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom"}>
                             <h1 className="h2">Trend series</h1>
                         </div>
-                        <button onClick={() => downloadData(data, filename)}>Download data</button>
-                        <div>
-                            <button onClick={() => setClass(0)}>No label</button>
-                            <button onClick={() => setClass(1)}>Class 1</button>
-                            <button onClick={() => setClass(2)}>Class 2</button>
+                        <button onClick={() => downloadData(data, filename)}>Download csv</button>
+                        <button onClick={() => saveData(data, filename)}>Save labels</button>
 
-                        </div>
 
-                        <BS data={data} dimensions={dimensions} primary={"Close"} selectedClass={selectedClass}/>
+                        <BS data={data} dimensions={dimensions} primary={"Close"} maxPoints={60}/>
                     </Col>
                 </Row>
 
