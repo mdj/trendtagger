@@ -1,4 +1,5 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+TrendTagger.com is a place to provide annotations to timeseries, especially time series with multi-dimensional data.
+
 
 ## Available Scripts
 
